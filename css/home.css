@@ -1,0 +1,517 @@
+/* =========================================================
+   Home di Edoardo Giolitti, versione scura ispirata a Squarespace
+   Mobile-first: le regole valgono per lo smartphone,
+   le media query (min-width) le adattano agli schermi larghi.
+   ========================================================= */
+
+/* ---------- Token ---------- */
+:root {
+  /* Antracite neutro con una punta calda (dall'arancione), niente blu */
+  --bg: #141413;          /* quasi nero */
+  --surface: #1e1d1c;     /* primo gradino di tono */
+  --surface-2: #2a2927;   /* secondo gradino */
+  --ink: #ececea;         /* bianco morbido e neutro, non #fff */
+  --muted: #a9a6a0;       /* 7.8:1 sul fondo, 6:1 sul secondo gradino */
+  --accent: #ff4502;      /* arancione: 5.4:1 sul fondo, ok anche per il testo piccolo */
+  --accent-ink: #141413;  /* testo sopra l'arancione */
+
+  --font: "Hanken Grotesk", system-ui, sans-serif;
+  --step-small: clamp(0.8125rem, 0.79rem + 0.1vw, 0.875rem);
+  --step-body: clamp(1.0625rem, 1rem + 0.28vw, 1.25rem);
+  --step-lead: clamp(1.25rem, 1.1rem + 0.7vw, 1.625rem);
+  --step-head: clamp(2.25rem, 1.3rem + 3.6vw, 4.5rem);
+  --step-display: clamp(2.5rem, 1rem + 5vw, 4.75rem);
+
+  --margin: clamp(20px, 4vw, 64px);
+  --section: clamp(112px, 13vw, 200px);
+  --radius: 6px;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --t-press: 140ms;
+  --t-hover: 200ms;
+}
+
+/* ---------- Reset ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; color-scheme: dark; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font-family: var(--font); font-size: var(--step-body); line-height: 1.45; letter-spacing: -0.005em;
+  -webkit-font-smoothing: antialiased; overflow-x: clip;
+}
+h1, h2, h3, p, figure, ul, ol, dl, dd { margin: 0; }
+ul[class], ol[class] { padding: 0; list-style: none; }
+img { display: block; max-width: 100%; height: auto; }
+button, input { font: inherit; color: inherit; }
+button { background: none; border: 0; padding: 0; cursor: pointer; }
+a { color: inherit; }
+::selection { background: var(--accent); color: var(--accent-ink); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+:target { scroll-margin-top: 24px; }
+
+h1, h2, h3 { font-weight: 400; letter-spacing: -0.045em; line-height: 0.95; text-wrap: balance; } /* sul fondo scuro un peso più leggero */
+p { max-width: 62ch; text-wrap: pretty; }
+.accent { color: var(--accent); }
+.muted { color: var(--muted); }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.skip-link { position: absolute; left: 12px; top: -80px; z-index: 100; background: var(--ink); color: var(--bg); padding: 12px 18px; text-decoration: none; }
+.skip-link:focus { top: 12px; }
+.center { text-align: center; margin-inline: auto; }
+
+/* ---------- Controlli ---------- */
+.button {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 48px; padding: 0 24px; border-radius: var(--radius);
+  background: var(--accent); color: var(--accent-ink);
+  font-weight: 500; text-decoration: none; white-space: nowrap;
+  transition: transform var(--t-press) var(--ease-out), background-color var(--t-hover) ease, color var(--t-hover) ease;
+}
+.button:active { transform: scale(0.97); }
+.button--light { background: var(--ink); color: var(--bg); }
+/* Secondario: solo il bordo arancione, si riempie in hover e al focus */
+.button--outline { background: transparent; color: var(--ink); border: 1.5px solid var(--accent); }
+.button--outline:focus-visible { background: var(--accent); color: var(--accent-ink); }
+.link { text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 0.22em; text-decoration-thickness: 0.07em; transition: text-decoration-color var(--t-hover) ease, color var(--t-hover) ease; }
+/* link dentro un testo: sottolineato anche a riposo, per riconoscerlo senza mouse (dopo .link, che altrimenti lo nasconde) */
+.link--inline { text-decoration-color: currentColor; color: var(--ink); }
+@media (hover: hover) and (pointer: fine) {
+  .button:hover { background: var(--ink); color: var(--bg); }
+  .button--light:hover { background: var(--accent); color: var(--accent-ink); }
+  .button--outline:hover { background: var(--accent); color: var(--accent-ink); }
+  .link:hover { text-decoration-color: currentColor; }
+}
+
+/* Badge degli ambiti */
+.badges { display: flex; flex-wrap: wrap; gap: 6px; }
+.badge {
+  padding: 5px 12px; border-radius: 999px;
+  background: var(--surface-2); color: var(--ink);
+  font-size: var(--step-small); line-height: 1.3; white-space: nowrap;
+}
+
+/* ---------- Barra in alto ----------
+   Sempre visibile. In cima alla pagina è trasparente sopra la hero; appena si scorre si compatta:
+   meno spazio, un velo del colore della pagina e, al posto del nome, solo il monogramma EG.
+   Senza JavaScript resta in cima alla pagina e scorre via con lei. */
+.topbar {
+  position: absolute; inset: 0 0 auto; z-index: 50;
+  display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 16px;
+  padding: 18px var(--margin); color: var(--ink);
+  transition: padding-block 260ms var(--ease-out), background-color var(--t-hover) ease, color var(--t-hover) ease;
+}
+.js .topbar { position: fixed; }
+.topbar.is-compact { padding-block: 8px; }
+.topbar.is-open { background-color: var(--bg); }
+/* Il velo della barra compatta: il colore della sezione che passa sotto (lo legge js/home.js) al 72%
+   (`--bar-veil`, più pieno su Libraccio), con la pagina sfocata dietro: così la barra si fonde con ogni sezione.
+   Sfuma per 20 px sotto la barra invece di finire con un bordo netto. Sotto il 72% il testo della barra,
+   sopra un'immagine chiara in una sezione scura, scenderebbe vicino al limite di contrasto. Con il menu aperto torna pieno. */
+.topbar::before {
+  content: ""; position: absolute; inset: 0 0 -20px; z-index: -1; pointer-events: none;
+  background: var(--bg);
+  background: color-mix(in srgb, var(--bg) var(--bar-veil, 72%), transparent);
+  -webkit-backdrop-filter: blur(18px) saturate(1.3); backdrop-filter: blur(18px) saturate(1.3); /* taste-skill-ignore: l'unica barra in vetro del sito */
+  -webkit-mask-image: linear-gradient(#000 calc(100% - 20px), transparent); mask-image: linear-gradient(#000 calc(100% - 20px), transparent); /* taste-skill-ignore: sfumatura del bordo basso */
+  opacity: 0; transition: opacity var(--t-hover) ease, background-color var(--t-hover) ease;
+}
+.topbar .button--outline { transition: transform var(--t-press) var(--ease-out), background-color var(--t-hover) ease, color var(--t-hover) ease, border-color var(--t-hover) ease; }
+.topbar.is-compact::before { opacity: 1; }
+.topbar.is-open::before { opacity: 0; }
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) { .topbar::before { background: color-mix(in srgb, var(--bg) 94%, transparent); } }
+@media (prefers-reduced-transparency: reduce) { .topbar::before { background: var(--bg); -webkit-backdrop-filter: none; backdrop-filter: none; } }
+html.js { scroll-padding-top: 80px; } /* le ancore e il focus da tastiera non finiscono sotto la barra */
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 500; letter-spacing: -0.02em; }
+/* Il logo EG (file Figma PORTFOLIO, sezione Components): una maschera riempita con il colore del testo, così segue
+   il colore della sezione sotto la barra. Scritto dentro il CSS perché le maschere esterne non funzionano aprendo
+   la pagina come file. Il sorgente è in _sorgenti/logo/logo-eg.svg. */
+.brand { --logo: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 121 75'%3E%3Cpath d='M121 37.5V37.5C121 38.8 120.9 40 120.8 41.3C120.7 42.5 120.5 43.8 120.2 45C119.7 47.6 118.9 50.1 117.9 52.5C116.7 55.2 115.2 57.7 113.5 60C113.5 60 113.5 60.1 113.5 60.1C111.3 62.9 108.8 65.4 106 67.5C106 67.6 105.9 67.6 105.9 67.6C103.6 69.4 101 70.8 98.3 72C95.9 73 93.4 73.8 90.8 74.3C88.5 74.8 86 75 83.6 75C83.5 75 83.3 75 83.2 75C80.6 75 78.1 74.7 75.7 74.2C74.4 73.9 73.1 73.6 71.9 73.2C70.6 72.7 69.3 72.2 68.1 71.7C66.8 71.1 65.6 70.4 64.3 69.7C63.2 69 62.2 68.3 61.1 67.5C60.9 67.4 60.7 67.2 60.5 67.1C60.5 67.1 60.5 67 60.5 67C59.2 66 57.9 64.9 56.7 63.7C56.2 63.1 55.6 62.5 55.1 61.9C54.6 61.3 54.1 60.7 53.6 60C53.4 59.7 53.2 59.4 53 59.1C51.5 57.1 50.3 54.9 49.3 52.5C48.2 50.2 47.4 47.7 46.9 45C46.7 43.8 46.5 42.6 46.3 41.3C46.3 40.7 46.2 40.1 46.2 39.4C46.2 39.4 46.2 39.4 46.2 39.4C46.2 39.2 46.2 39 46.2 38.8C46.2 38.7 46.2 38.6 46.2 38.5C46.2 38.2 46.2 37.8 46.2 37.5V37.5C46.2 37.2 46.2 36.9 46.2 36.6C46.2 36.4 46.2 36.1 46.2 35.9C46.2 35.2 46.3 34.5 46.3 33.8H71.9V41.3H53.6C53.6 41.3 53.6 41.3 53.6 41.3C53.8 42.6 54 43.8 54.3 45C54.3 45 54.3 45 54.3 45C54.9 47.3 55.7 49.4 56.8 51.4C57 51.8 57.2 52.2 57.4 52.5C57.4 52.5 57.4 52.5 57.4 52.5C58.3 54.1 59.3 55.6 60.5 57C60.5 57 60.5 57 60.6 57C61.5 58.1 62.4 59.1 63.5 60C63.5 60 63.5 60 63.5 60C63.8 60.3 64.1 60.5 64.4 60.7C64.8 61.1 65.3 61.5 65.8 61.9C66.6 62.4 67.3 62.9 68.1 63.4C69.3 64.1 70.6 64.7 71.9 65.3C73.1 65.8 74.4 66.2 75.7 66.5C75.9 66.6 76.2 66.7 76.5 66.7C76.7 66.8 77 66.9 77.3 66.9C77.4 67 77.5 67 77.6 67C77.6 67 77.6 67 77.6 67C77.7 67 77.7 67 77.7 67C77.8 67 77.8 67 77.8 67C77.8 67 77.8 67.1 77.9 67.1C77.9 67.1 78 67.1 78.1 67.1C78.2 67.1 78.4 67.2 78.5 67.2C78.8 67.2 79 67.3 79.3 67.3C79.4 67.3 79.6 67.3 79.7 67.3C79.7 67.3 79.7 67.3 79.7 67.3C79.7 67.3 79.7 67.3 79.7 67.3C79.8 67.3 79.8 67.3 79.9 67.3C79.9 67.3 79.9 67.3 79.9 67.3H79.9H80C80 67.3 80.1 67.4 80.2 67.4C80.3 67.4 80.3 67.4 80.3 67.4C80.4 67.4 80.4 67.4 80.5 67.4C80.6 67.4 80.6 67.4 80.6 67.4C80.7 67.4 80.9 67.4 81 67.4C81.3 67.5 81.6 67.5 81.8 67.5C82 67.5 82.1 67.5 82.3 67.5C82.6 67.5 82.9 67.5 83.2 67.5C83.3 67.5 83.3 67.5 83.4 67.5C83.7 67.5 84.1 67.5 84.5 67.5C84.6 67.5 84.7 67.5 84.8 67.5C84.9 67.5 84.9 67.5 85 67.5C85.1 67.5 85.2 67.5 85.3 67.4C85.4 67.4 85.4 67.4 85.4 67.4C85.4 67.4 85.5 67.4 85.5 67.4C85.5 67.4 85.5 67.4 85.6 67.4C85.7 67.4 85.8 67.4 85.9 67.4C86 67.4 86.2 67.4 86.3 67.4C86.4 67.4 86.5 67.4 86.7 67.3C86.8 67.3 86.9 67.3 87.1 67.3C87.1 67.3 87.1 67.3 87.1 67.3C87.1 67.3 87.2 67.3 87.2 67.3C87.2 67.3 87.3 67.3 87.3 67.3C87.3 67.3 87.3 67.3 87.4 67.3C87.5 67.3 87.6 67.3 87.7 67.2C87.7 67.2 87.7 67.2 87.8 67.2C87.9 67.2 88 67.2 88.1 67.2C88.3 67.2 88.6 67.1 88.9 67.1C89 67 89.1 67 89.3 67C89.4 67 89.5 66.9 89.6 66.9C89.8 66.9 90 66.8 90.2 66.8C90.3 66.7 90.5 66.7 90.6 66.7C90.6 66.7 90.7 66.7 90.8 66.6C93.5 66 96 64.9 98.4 63.6C100.1 62.6 101.8 61.4 103.3 60C104.2 59.2 105.1 58.3 105.9 57.4C107.2 55.9 108.4 54.3 109.4 52.5C110.8 50.2 111.8 47.7 112.5 45C112.8 43.8 113 42.6 113.2 41.3C113.2 41.2 113.2 41 113.2 40.9C113.2 40.7 113.3 40.6 113.3 40.5C113.3 40.4 113.3 40.3 113.3 40.2C113.3 40.1 113.3 39.9 113.3 39.8C113.3 39.7 113.3 39.7 113.3 39.6C113.3 39.6 113.3 39.6 113.3 39.6C113.3 39.5 113.4 39.4 113.4 39.4C113.4 39.3 113.4 39.3 113.4 39.2C113.4 39.2 113.4 39.2 113.4 39.2C113.4 39.1 113.4 39.1 113.4 39.1C113.4 39.1 113.4 39.1 113.4 39.1C113.4 39 113.4 38.9 113.4 38.8C113.4 38.8 113.4 38.7 113.4 38.7C113.4 38.6 113.4 38.6 113.4 38.6C113.4 38.6 113.4 38.5 113.4 38.5C113.4 38.5 113.4 38.5 113.4 38.4V38.4C113.4 38.3 113.4 38.1 113.4 38C113.4 37.8 113.4 37.7 113.4 37.5V37.5C113.4 37.3 113.4 37.2 113.4 37C113.4 37 113.4 37 113.4 36.9C113.4 36.9 113.4 36.8 113.4 36.8C113.4 36.7 113.4 36.7 113.4 36.7C113.4 36.7 113.4 36.7 113.4 36.7C113.4 36.6 113.4 36.6 113.4 36.6C113.4 36.6 113.4 36.6 113.4 36.6C113.4 36.5 113.4 36.5 113.4 36.5C113.4 36.5 113.4 36.4 113.4 36.4V36.4C113.4 36.3 113.4 36.3 113.4 36.2V36.2C113.4 36.2 113.4 36.2 113.4 36.2C113.4 36.2 113.4 36.1 113.4 36.1C113.4 36.1 113.4 36.1 113.4 36.1V36C113.4 36 113.4 36 113.4 36C113.4 35.9 113.4 35.9 113.4 35.9C113.4 35.9 113.4 35.8 113.4 35.8C113.4 35.7 113.4 35.6 113.4 35.5C113.4 35.4 113.4 35.3 113.4 35.2C113.3 35 113.3 34.9 113.3 34.8C113.3 34.8 113.3 34.8 113.3 34.7C113.3 34.6 113.3 34.5 113.3 34.4C113.3 34.3 113.3 34.3 113.3 34.2C113.3 34.1 113.2 33.9 113.2 33.8C113.1 32.5 112.8 31.2 112.5 30C111.8 27.3 110.8 24.8 109.4 22.5C108.4 20.7 107.3 19.1 105.9 17.7C105.1 16.7 104.2 15.8 103.2 15C101.7 13.6 100.1 12.5 98.4 11.5C96 10.1 93.5 9.1 90.8 8.4C88.4 7.8 85.9 7.5 83.4 7.5C83.3 7.5 83.3 7.5 83.2 7.5C82.9 7.5 82.6 7.5 82.3 7.5H64.4V0H85.8C87.5 0.1 89.2 0.3 90.8 0.6C93.4 1.1 95.9 1.9 98.4 3C101.1 4.1 103.6 5.6 105.9 7.3C106 7.4 106 7.4 106.1 7.5C108.9 9.6 111.4 12.1 113.5 14.9C113.5 14.9 113.5 15 113.6 15C115.3 17.3 116.8 19.8 117.9 22.5C118.9 24.9 119.7 27.4 120.3 30C120.5 31.2 120.7 32.5 120.8 33.8C120.9 35 121 36.2 121 37.5Z'/%3E%3Cpath d='M8.5 30C8.2 31.2 8 32.5 7.8 33.8C7.8 33.8 7.8 33.8 7.8 33.8H26.6V41.2H7.8C7.8 41.3 7.8 41.3 7.8 41.3C8 42.5 8.2 43.8 8.5 45C8.5 45 8.5 45 8.5 45C9.2 47.7 10.3 50.2 11.6 52.5C11.6 52.5 11.6 52.5 11.6 52.5C12.6 54.3 13.8 55.9 15.2 57.5V57.5C16 58.4 16.8 59.2 17.7 60H17.8C19.3 61.4 21 62.6 22.8 63.6C23.3 63.9 23.9 64.2 24.6 64.5C24.7 64.6 24.8 64.6 24.9 64.7C25 64.7 25 64.7 25 64.8C25.1 64.8 25.2 64.8 25.3 64.9C25.4 64.9 25.5 64.9 25.6 65C25.6 65 25.6 65 25.7 65C25.8 65.1 26 65.1 26.1 65.2C26.2 65.3 26.4 65.3 26.6 65.4C26.7 65.4 26.9 65.5 27 65.6C27.1 65.6 27.1 65.6 27.1 65.6C27.2 65.6 27.4 65.7 27.5 65.7C27.5 65.7 27.5 65.8 27.6 65.8C27.7 65.8 27.8 65.9 28 65.9C28.1 66 28.3 66 28.4 66.1C28.6 66.1 28.8 66.2 28.9 66.2C29.4 66.4 29.9 66.5 30.3 66.6C30.5 66.6 30.6 66.7 30.7 66.7C30.8 66.7 30.8 66.7 30.9 66.8C31 66.8 31 66.8 31.1 66.8C31.1 66.8 31.2 66.8 31.3 66.8C31.6 66.9 31.9 67 32.2 67C32.3 67 32.4 67.1 32.5 67.1C32.6 67.1 32.6 67.1 32.6 67.1C32.7 67.1 32.9 67.1 33 67.2C33 67.2 33.1 67.2 33.1 67.2C33.1 67.2 33.2 67.2 33.2 67.2C33.2 67.2 33.3 67.2 33.3 67.2C33.4 67.2 33.4 67.2 33.5 67.2C33.5 67.2 33.5 67.2 33.5 67.2C33.6 67.2 33.6 67.2 33.7 67.3C33.7 67.3 33.7 67.3 33.8 67.3C33.8 67.3 33.9 67.3 34 67.3C34 67.3 34.1 67.3 34.2 67.3C34.3 67.3 34.4 67.3 34.6 67.4C34.7 67.4 34.8 67.4 34.9 67.4C35.2 67.4 35.5 67.4 35.8 67.5C35.9 67.5 36 67.5 36.1 67.5C36.1 67.5 36.2 67.5 36.2 67.5C36.3 67.5 36.4 67.5 36.5 67.5H56.8V75H37.4C35 75 32.6 74.8 30.3 74.3C30 74.2 29.7 74.2 29.4 74.1C29 74 28.7 74 28.3 73.9C28.2 73.8 28 73.8 27.9 73.8C27.4 73.6 27 73.5 26.6 73.4C25.7 73.1 24.9 72.9 24.1 72.6C24 72.5 23.8 72.4 23.7 72.4C23.4 72.3 23 72.1 22.7 72C20.1 70.8 17.5 69.4 15.2 67.7C15.1 67.6 15 67.5 15 67.5C12.2 65.4 9.7 62.9 7.6 60.2C7.6 60.1 7.5 60.1 7.5 60C5.8 57.7 4.3 55.2 3.1 52.5C2.1 50.1 1.3 47.6 0.8 45C0.5 43.8 0.3 42.5 0.2 41.3C0.1 40.7 0.1 40.2 0.1 39.7C0 39 0 38.2 0 37.5C0 36.7 0 36 0.1 35.2C0.1 34.7 0.1 34.3 0.2 33.8C0.3 32.5 0.5 31.2 0.7 30C1.3 27.4 2.1 24.9 3.1 22.5C4.3 19.8 5.7 17.3 7.4 15C7.5 14.9 7.6 14.8 7.6 14.7C9.7 12 12.2 9.6 14.9 7.5C15 7.4 15.1 7.3 15.2 7.3C17.5 5.5 20.1 4.1 22.7 2.9C23.1 2.8 23.4 2.7 23.7 2.5C23.8 2.5 24 2.4 24.1 2.4C24.9 2.1 25.7 1.8 26.6 1.5C27 1.4 27.4 1.3 27.9 1.2C28 1.1 28.2 1.1 28.3 1C28.7 1 29 0.9 29.4 0.8C29.7 0.7 30 0.7 30.3 0.6C31.9 0.3 33.5 0.1 35.2 0H56.8V7.5H38.7C38.4 7.5 38.1 7.5 37.9 7.5C37.8 7.5 37.7 7.5 37.6 7.5C35.1 7.5 32.7 7.8 30.3 8.4C29.8 8.5 29.4 8.6 28.9 8.8C28.7 8.8 28.6 8.9 28.4 8.9C28.3 9 28.1 9 27.9 9.1C27.8 9.1 27.7 9.2 27.5 9.2C27.5 9.2 27.5 9.2 27.4 9.3C27.3 9.3 27.2 9.3 27.1 9.4C27.1 9.4 27 9.4 27 9.4C26.8 9.5 26.7 9.5 26.6 9.6C26.4 9.7 26.2 9.7 26.1 9.8C25.9 9.8 25.8 9.9 25.7 10C25.6 10 25.6 10 25.5 10C25.5 10.1 25.4 10.1 25.3 10.1C25.2 10.2 25.1 10.2 25 10.2C25 10.2 24.9 10.3 24.9 10.3C24.8 10.3 24.7 10.4 24.5 10.5C24.1 10.7 23.6 10.9 23.2 11.2C23 11.2 22.9 11.3 22.7 11.4C21 12.4 19.3 13.6 17.8 14.9C16.9 15.8 16 16.6 15.2 17.5C13.8 19.1 12.6 20.7 11.6 22.5C10.3 24.8 9.2 27.3 8.5 30Z'/%3E%3C/svg%3E"); }
+.brand__mark { display: block; flex: none; width: 42px; height: 26px; background-color: currentColor; -webkit-mask: var(--logo) center / contain no-repeat; mask: var(--logo) center / contain no-repeat; transition: background-color var(--t-hover) ease; }
+.brand > span:last-child { transition: opacity var(--t-hover) ease, transform 260ms var(--ease-out), visibility 0s; }
+.topbar.is-compact .brand > span:last-child { opacity: 0; transform: translateX(-8px); visibility: hidden; transition-delay: 0s, 0s, 260ms; }
+.topbar nav { justify-self: end; }
+.topbar__links { display: flex; gap: 20px; font-size: var(--step-small); }
+.topbar__links > li > a { text-decoration: none; padding: 10px 0; display: inline-flex; align-items: center; gap: 6px; }
+.topbar__links > li > a[aria-current="page"] { text-decoration: underline; text-decoration-color: currentColor; } /* la pagina in cui sei, non solo col colore */
+/* "Scrivimi" è l'unico contatto della barra (niente voce Contatti): c'è anche su telefono */
+.topbar .button { min-height: 40px; padding: 0 16px; font-size: var(--step-small); justify-self: end; }
+/* su telefono il nome lascia il posto ai link: resta il monogramma EG */
+.topbar .brand > span:last-child { display: none; }
+@media (max-width: 359px) { .topbar { gap: 10px; } .topbar__links { gap: 14px; } .topbar .button { padding: 0 12px; } }
+@media (min-width: 560px) { .topbar .brand > span:last-child { display: inline; } }
+@media (min-width: 720px) {
+  .topbar { grid-template-columns: 1fr auto 1fr; }
+  .topbar nav { justify-self: center; }
+  .topbar__links { gap: 32px; }
+}
+
+/* Menu dei progetti: si apre passando su "Progetti" (con il tocco, toccandolo).
+   È la barra che si allunga verso il basso, con lo stesso fondo; sotto, un velo scuro stacca la pagina.
+   L'elenco ripete l'indice della home: nome, tipo di progetto e, su schermo largo, l'anteprima. */
+.topbar__chev { width: 10px; height: 10px; flex: none; transition: transform var(--t-hover) var(--ease-out); }
+.topbar.is-open .topbar__chev { transform: rotate(180deg); }
+.menu {
+  position: absolute; left: 0; right: 0; top: 100%;
+  max-height: calc(100vh - 72px); overflow-y: auto; overscroll-behavior: contain;
+  padding: 12px var(--margin) clamp(28px, 4vw, 48px);
+  background: var(--bg); color: var(--ink);
+  display: grid; gap: 20px; align-content: start;
+  visibility: hidden; opacity: 0; transform: translateY(-6px);
+  transition: opacity 180ms ease, transform 240ms var(--ease-out), visibility 0s linear 240ms;
+}
+.topbar.is-open .menu { visibility: visible; opacity: 1; transform: none; transition-delay: 0s; }
+.menu__list { display: grid; max-width: 560px; }
+.menu__item { display: flex; align-items: center; justify-content: space-between; gap: 14px; min-height: 52px; padding-block: 6px; text-decoration: none; }
+.menu__name { font-size: clamp(1.375rem, 1rem + 1.3vw, 2.25rem); letter-spacing: -0.045em; line-height: 1; }
+.menu__item[aria-current="page"] .menu__name { text-decoration: underline; text-decoration-thickness: 0.06em; text-underline-offset: 0.16em; }
+.menu__preview { display: none; }
+.menu__all { justify-self: start; font-size: var(--step-small); padding: 10px 0; color: var(--muted); text-decoration-color: currentColor; }
+.topbar__scrim {
+  position: fixed; inset: 0; z-index: 49; background: rgba(10, 10, 9, 0.7);
+  visibility: hidden; opacity: 0; transition: opacity 200ms ease, visibility 0s linear 200ms;
+}
+.topbar__scrim.is-on { visibility: visible; opacity: 1; transition-delay: 0s; }
+@media (min-width: 900px) {
+  .menu { grid-template-columns: minmax(0, 1fr) clamp(320px, 36vw, 540px); grid-template-areas: "list preview" "all preview"; column-gap: clamp(40px, 6vw, 112px); row-gap: 12px; padding-top: 20px; }
+  .menu__list { grid-area: list; }
+  .menu__all { grid-area: all; }
+  /* come nell'indice della home: i nomi sono grigi, quello attivo si accende e si sposta */
+  .menu__item { justify-content: flex-start; min-height: 0; padding-block: 7px; }
+  .menu__name, .menu__item .work__type { transition: color var(--t-hover) ease, transform 300ms var(--ease-out); }
+  .menu__name { color: var(--muted); }
+  .menu__item.is-active .menu__name { color: var(--ink); }
+  .menu__item.is-active .menu__name, .menu__item.is-active .work__type { transform: translateX(10px); }
+  /* le anteprime stanno nella stessa cella: se ne vede una alla volta */
+  .menu__preview { grid-area: preview; display: grid; align-self: start; }
+  .menu__preview figure { grid-area: 1 / 1; visibility: hidden; opacity: 0; transition: opacity 260ms ease, visibility 0s linear 260ms; }
+  .menu__preview figure.is-on { visibility: visible; opacity: 1; transition-delay: 0s; }
+  .menu__preview img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: var(--radius); background: var(--surface); }
+  .menu__preview figcaption { margin-top: 14px; color: var(--muted); font-size: var(--step-small); max-width: 40ch; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .topbar, .topbar *, .menu, .topbar__scrim { transition: none !important; }
+}
+
+/* =========================================================
+   HERO: titolo centrato su uno sfondo di copertine che scorrono
+   ========================================================= */
+.hero {
+  position: relative; isolation: isolate; overflow: hidden;
+  display: grid; place-items: center; min-height: 600px;
+  padding: 120px var(--margin) 72px; text-align: center;
+}
+.hero__content { position: relative; z-index: 2; }
+.hero h1 { font-size: var(--step-head); max-width: 18ch; margin: 0 auto; }
+.hero__sub { margin: 20px auto 28px; color: var(--ink); max-width: 50ch; } /* centrato: al massimo tre righe */
+
+/* Sfondo decorativo: file di copertine che scorrono (3 su desktop, 5 più piccole su telefono).
+   aria-hidden + pointer-events: none = non si clicca e lo screen reader lo salta. */
+.hero__bg {
+  --img: 48vw; --gap: clamp(12px, 1.6vw, 20px);
+  --sway: calc((var(--img) + var(--gap)) * 0.18); /* ritmo proprio di ogni fila attorno al passo comune: ±0,18 copertine su telefono, ±0,25 da 720 px */
+  position: absolute; inset: 0; z-index: 0; pointer-events: none; user-select: none;
+  display: grid; align-content: center; gap: var(--gap);
+  transform: rotate(-4deg) scale(1.12);
+}
+/* Velo scuro, più pieno al centro dove c'è il testo: garantisce il contrasto AA */
+.hero::before {
+  content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background:
+    linear-gradient(to bottom, rgba(20, 20, 19, 0.96) 0, rgba(20, 20, 19, 0) 150px), /* taste-skill-ignore: velo neutro sotto la barra in alto */
+    radial-gradient(ellipse 60% 55% at 50% 50%, rgba(20, 20, 19, 0.94) 0%, rgba(20, 20, 19, 0.9) 45%, rgba(20, 20, 19, 0.62) 100%); /* taste-skill-ignore: velo neutro sopra le immagini */
+}
+/* Ogni fila scorre per conto suo, ma senza mai mettere lo stesso progetto in due file una sopra l'altra.
+   Velocità diverse o direzioni opposte farebbero allineare le file prima o poi: per questo il passo medio è lo stesso
+   per tutte (84 s, verso sinistra, 12 s = una copertina) e ogni fila ha in più un'oscillazione propria (`sway`, ±0,25
+   copertine da 720 px e ±0,18 su telefono, periodi diversi), così accelera e rallenta in momenti diversi dalle altre.
+   Ogni fila ha i 7 progetti nell'ordine dell'indice ma parte da un progetto diverso (a dal 1°, b dal 4°, c dal 6°;
+   su telefono d dal 3° ed e dal 7°) e alcune partono sfasate di una frazione di copertina (--delay negativo).
+   Verificato con una simulazione e sulla pagina: mai lo stesso progetto in due file vicine sovrapposte; da 1024 px
+   sempre tutti e 7 visibili (al massimo 2 doppioni), a 768 px e su telefono 7 per il 93-96% del tempo e 6 nel resto. */
+.marquee__row { overflow: hidden; }
+.marquee__track {
+  display: flex; width: max-content;
+  animation:
+    marquee 84s linear var(--delay, 0s) infinite, /* la fila è duplicata: spostarla di metà larghezza crea un giro continuo */
+    sway var(--sway-t, 11s) ease-in-out var(--sway-delay, 0s) infinite alternate;
+}
+.marquee__track img {
+  width: var(--img); aspect-ratio: 16 / 9; height: auto;
+  object-fit: cover; border-radius: var(--radius); background: var(--surface);
+  margin-right: var(--gap); /* margine e non gap: così la metà della fila coincide e il giro non scatta */
+}
+.marquee__row--a { --sway-t: 11s; }
+.marquee__row--b { --sway-t: 15.5s; --sway-delay: -11.5s; --delay: -82s; }
+.marquee__row--c { --sway-t: 13.5s; --sway-delay: -19.2s; --delay: -78s; }
+.marquee__row--d { --sway-t: 17.5s; --sway-delay: -6.3s; --delay: -78s; }
+.marquee__row--e { --sway-t: 12.5s; --sway-delay: -13.3s; --delay: -82s; }
+/* con le animazioni ridotte le file restano ferme, ma già sfasate */
+@media (prefers-reduced-motion: reduce) { .marquee__track { animation-play-state: paused; } }
+@media (min-width: 720px) {
+  .hero { min-height: min(100svh, 920px); }
+  .hero__bg { --img: clamp(240px, 30vw, 460px); --sway: calc((var(--img) + var(--gap)) * 0.25); }
+  .marquee__row--d, .marquee__row--e { display: none; }
+  .marquee__row--b { --delay: -76s; }
+  .marquee__row--c { --delay: -80s; }
+}
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes sway { from { translate: calc(var(--sway) * -1) 0; } to { translate: var(--sway) 0; } } /* translate si somma a transform */
+
+/* =========================================================
+   SLIDER DEI PROGETTI
+   ========================================================= */
+.carousel { padding-top: var(--section); }
+.carousel__head { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-inline: var(--margin); margin-bottom: 28px; }
+.carousel__head h2 { font-size: var(--step-lead); letter-spacing: -0.03em; line-height: 1.1; }
+.carousel__controls { display: flex; align-items: center; gap: 8px; }
+.carousel__count { font-size: var(--step-small); color: var(--muted); margin-right: 8px; font-variant-numeric: tabular-nums; }
+.carousel__btn {
+  display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%;
+  background: var(--surface-2); color: var(--ink);
+  transition: background-color var(--t-hover) ease, color var(--t-hover) ease, transform var(--t-press) var(--ease-out), opacity var(--t-hover) ease;
+}
+.carousel__btn svg { width: 20px; height: 20px; }
+.carousel__btn:active { transform: scale(0.92); }
+.carousel__btn:disabled { opacity: 0.35; cursor: default; }
+@media (hover: hover) and (pointer: fine) { .carousel__btn:not(:disabled):hover { background: var(--accent); color: var(--accent-ink); } }
+.carousel__track {
+  display: grid; grid-auto-flow: column; grid-auto-columns: 84vw; gap: 14px;
+  padding-inline: var(--margin); scroll-padding-inline: var(--margin);
+  overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain;
+}
+.carousel__track::-webkit-scrollbar { display: none; }
+.carousel__track.is-dragging { scroll-snap-type: none; cursor: grabbing; }
+.pcard { scroll-snap-align: start; }
+.pcard a { display: flex; flex-direction: column; height: 100%; border-radius: var(--radius); overflow: hidden; background: var(--surface); text-decoration: none; transition: background-color var(--t-hover) ease; }
+.pcard__img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; background: var(--surface-2); transition: transform 600ms var(--ease-out); user-select: none; -webkit-user-drag: none; }
+.pcard__img--contain { object-fit: contain; background: #fff; }
+.pcard__img--field { display: grid; place-items: center; background: #025c42; color: #fff; font-family: Georgia, serif; font-size: var(--step-head); letter-spacing: -0.02em; }
+.pcard__body { display: grid; gap: 10px; padding: 20px 22px 24px; }
+.pcard__title { font-size: var(--step-lead); letter-spacing: -0.03em; line-height: 1.1; }
+.pcard__text { color: var(--muted); font-size: var(--step-body); line-height: 1.45; max-width: 46ch; }
+@media (hover: hover) and (pointer: fine) {
+  .pcard a:hover { background: var(--surface-2); }
+  .pcard a:hover .pcard__img { transform: scale(1.03); }
+}
+@media (min-width: 720px) { .carousel__track { grid-auto-columns: 58vw; } }
+@media (min-width: 1100px) { .carousel__track { grid-auto-columns: min(40vw, 620px); gap: 18px; } }
+
+/* Numeri */
+.stats { display: flex; justify-content: center; flex-wrap: wrap; gap: 32px clamp(40px, 8vw, 120px); padding: var(--section) var(--margin) 0; text-align: center; }
+.stats b { display: block; font-weight: 400; font-size: var(--step-head); letter-spacing: -0.05em; line-height: 1; }
+.stats span { display: block; margin-top: 10px; font-size: var(--step-small); color: var(--muted); }
+
+/* =========================================================
+   LAVORI: i nomi come indice, con la card del progetto attivo
+   ========================================================= */
+.work { padding: var(--section) var(--margin) 0; }
+.section-head { display: grid; gap: 16px; margin-bottom: clamp(40px, 5vw, 72px); }
+.section-head h2 { font-size: var(--step-lead); letter-spacing: -0.03em; line-height: 1.1; }
+.section-head p { color: var(--muted); }
+.work__grid { display: grid; gap: 48px; }
+.work__list { display: grid; gap: 40px; }
+.work__item { display: block; padding-block: 10px; text-decoration: none; }
+.work__name { font-size: var(--step-head); font-weight: 400; letter-spacing: -0.05em; line-height: 1; }
+/* su telefono non c'è l'hover: sotto ogni nome compare la sua card, dentro lo stesso link */
+.work__frame { display: none; }
+.work__card { display: flex; flex-direction: column; margin-top: 14px; border-radius: var(--radius); overflow: hidden; background: var(--surface); }
+.work__card .pcard__body { gap: 10px; }
+
+@media (min-width: 960px) {
+  .work__grid { grid-template-columns: 7fr 5fr; gap: 56px; align-items: start; }
+  .work__list { gap: 0; }
+  .work__item { padding-block: 14px; }
+  .work__card { display: none; }
+  .work__name { font-size: var(--step-display); white-space: nowrap; color: var(--muted); transition: color var(--t-hover) ease, transform 300ms var(--ease-out); display: inline-block; }
+  .work__item.is-active .work__name { color: var(--ink); transform: translateX(10px); }
+  /* le sei card stanno nella stessa cella della griglia: ne è visibile una alla volta */
+  .work__frame { display: grid; position: sticky; top: 12vh; }
+  .work__frame > .pcard { grid-area: 1 / 1; visibility: hidden; opacity: 0; transform: translateY(12px); transition: opacity 500ms ease, transform 650ms var(--ease-out), visibility 0s linear 650ms; }
+  .work__frame > .pcard.is-on { visibility: visible; opacity: 1; transform: none; transition-delay: 0s; }
+}
+
+/* =========================================================
+   SHOWCASE: RaceReady a schede
+   ========================================================= */
+.showcase { padding: var(--section) var(--margin) 0; text-align: center; }
+.showcase h2 { font-size: var(--step-head); max-width: 14ch; margin: 0 auto; }
+.showcase__sub { margin: 18px auto 28px; color: var(--muted); max-width: 44ch; }
+.tabs { display: none; justify-content: center; flex-wrap: wrap; gap: 6px; margin-bottom: 28px; }
+.js .tabs { display: flex; }
+.tab { padding: 10px 18px; border-radius: 999px; background: var(--surface); color: var(--muted); font-size: var(--step-small); transition: background-color var(--t-hover) ease, color var(--t-hover) ease; }
+.tab[aria-selected="true"] { background: var(--ink); color: var(--bg); }
+@media (hover: hover) and (pointer: fine) { .tab:hover { color: var(--ink); } .tab[aria-selected="true"]:hover { color: var(--bg); } }
+
+.slide { display: grid; text-align: left; border-radius: var(--radius); overflow: hidden; background: var(--surface); max-width: 1280px; margin: 0 auto; }
+.slide + .slide { margin-top: 16px; }
+.js .slide + .slide { margin-top: 0; }
+.js .slide[hidden] { display: none; }
+html:not(.js) .slide[hidden] { display: grid; } /* senza script si vedono tutte e tre */
+.slide__text { display: flex; flex-direction: column; gap: 20px; padding: 28px; }
+.slide__text h3 { font-size: var(--step-lead); letter-spacing: -0.03em; line-height: 1.1; }
+.slide__text p { color: var(--muted); max-width: 36ch; }
+.slide__nums { display: flex; flex-wrap: wrap; gap: 12px 32px; margin-top: auto; }
+.slide__nums b { display: block; font-weight: 400; font-size: var(--step-head); letter-spacing: -0.05em; line-height: 1; color: var(--accent); }
+.slide__nums span { font-size: var(--step-small); color: var(--muted); }
+.slide__media { aspect-ratio: 4 / 3; background: #fff; }
+.slide__media img { width: 100%; height: 100%; object-fit: cover; }
+.slide__media--contain img { object-fit: contain; }
+.slide__media--navy { background: #172033; } /* il blu di RaceReady, per i collage */
+.showcase__actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px 24px; align-items: center; margin-top: 32px; }
+@media (min-width: 900px) {
+  .slide { grid-template-columns: 5fr 7fr; min-height: 68svh; }
+  .slide__text { padding: 48px; }
+  .slide__media { aspect-ratio: auto; }
+}
+
+/* =========================================================
+   COSA SO FARE: una fila di card scure
+   ========================================================= */
+.skills { padding: var(--section) 0 0; }
+.skills .section-head { padding-inline: var(--margin); }
+.skills__row {
+  display: grid; grid-auto-flow: column; grid-auto-columns: 78vw; gap: 12px;
+  padding-inline: var(--margin); overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none;
+}
+.skills__row::-webkit-scrollbar { display: none; }
+.skill { display: flex; flex-direction: column; gap: 12px; padding: 20px; border-radius: var(--radius); background: var(--surface); scroll-snap-align: start; }
+.skill h3 { font-size: var(--step-lead); letter-spacing: -0.03em; line-height: 1.1; }
+.skill p { color: var(--muted); font-size: var(--step-small); }
+.skill img { margin-top: auto; aspect-ratio: 4 / 3; width: 100%; object-fit: cover; border-radius: calc(var(--radius) - 2px); background: #fff; transition: transform 500ms var(--ease-out); }
+.skill img.contain { object-fit: contain; }
+@media (min-width: 900px) {
+  .skills__row { grid-auto-flow: row; grid-template-columns: repeat(4, 1fr); overflow: visible; }
+  .skills .section-head { grid-template-columns: 1fr 1fr; align-items: end; }
+}
+@media (hover: hover) and (pointer: fine) { .skill:hover img { transform: scale(1.03); } }
+
+/* =========================================================
+   CHI SONO: ritratto e poche righe, centrati
+   ========================================================= */
+.about { padding: var(--section) var(--margin) 0; text-align: center; }
+.about__face { width: 112px; height: 112px; border-radius: 50%; object-fit: cover; margin: 0 auto 28px; }
+.about h2 { font-size: var(--step-head); max-width: 14ch; margin: 0 auto; }
+.about p { margin: 20px auto 24px; color: var(--muted); max-width: 46ch; }
+
+/* =========================================================
+   MURO DI IMMAGINI in prospettiva
+   ========================================================= */
+.wall { position: relative; margin-top: var(--section); padding-inline: var(--margin); perspective: 1400px; }
+.wall__title { text-align: center; padding-block: 48px; }
+.wall__title h2 { font-size: var(--step-head); max-width: 12ch; margin: 0 auto; }
+.wall__title p { margin: 16px auto 0; color: var(--muted); max-width: 32ch; }
+.wall__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.wall__grid img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius); background: var(--surface); }
+.wall__grid img.contain { object-fit: contain; background: #fff; }
+@media (min-width: 900px) {
+  .wall__grid { grid-template-columns: 1fr 1.25fr 1fr; grid-template-rows: auto auto auto; gap: 18px 28px; align-items: center; }
+  .wall__col { display: grid; gap: 18px; transform-style: preserve-3d; }
+  .wall__col--left { transform: rotateY(var(--wall-ry, 28deg)); transform-origin: right center; }
+  .wall__col--right { transform: rotateY(calc(var(--wall-ry, 28deg) * -1)); transform-origin: left center; }
+  .wall__col--mid { gap: 0; }
+  .wall__col--mid img { width: 72%; margin: 0 auto; }
+}
+@media (max-width: 899px) {
+  .wall__col { display: contents; }
+  .wall__title { grid-column: 1 / -1; order: -1; padding-block: 0 24px; }
+}
+
+/* =========================================================
+   FISARMONICA: come lavoro, strumenti, percorso
+   ========================================================= */
+.faq { padding: var(--section) var(--margin) 0; max-width: 1100px; margin: 0 auto; }
+.faq details { border-radius: var(--radius); background: var(--surface); }
+.faq details + details { margin-top: 8px; }
+.faq summary {
+  display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  padding: 24px 28px; cursor: pointer; list-style: none;
+  font-size: var(--step-lead); letter-spacing: -0.03em; line-height: 1.1;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; font-size: 1.5em; line-height: 1; color: var(--accent); transition: transform 300ms var(--ease-out); }
+.faq details[open] summary::after { transform: rotate(45deg); }
+.faq .faq__body { padding: 0 28px 28px; color: var(--muted); display: grid; gap: 14px; }
+.faq .faq__body strong { color: var(--ink); font-weight: 500; }
+@media (hover: hover) and (pointer: fine) { .faq summary:hover { color: var(--accent); } }
+
+/* =========================================================
+   CHIUSURA: una domanda, un campo
+   ========================================================= */
+.closing { padding: var(--section) var(--margin); text-align: center; }
+.closing h2 { font-size: var(--step-head); max-width: 18ch; margin: 0 auto; }
+.closing > p { margin: 18px auto 32px; color: var(--muted); max-width: 40ch; }
+.field-wrap { position: relative; max-width: 620px; margin: 0 auto; }
+.field {
+  display: block; width: 100%; min-height: 64px; padding: 20px 72px 20px 22px; line-height: 1.4; resize: vertical; font: inherit; border: 0; border-radius: var(--radius);
+  background: var(--surface-2); color: var(--ink); font-size: var(--step-body);
+}
+.field::placeholder { color: var(--muted); }
+.field:focus { outline: 2px solid var(--accent); outline-offset: -2px; }
+.send {
+  position: absolute; right: 8px; top: 8px; width: 48px; height: 48px; border-radius: var(--radius);
+  display: grid; place-items: center; background: var(--accent); color: var(--accent-ink);
+  transition: transform var(--t-press) var(--ease-out), background-color var(--t-hover) ease;
+}
+.send:active { transform: scale(0.94); }
+.send svg { width: 22px; height: 22px; }
+@media (hover: hover) and (pointer: fine) { .send:hover { background: var(--ink); } }
+.closing__note { margin-top: 14px; font-size: var(--step-small); color: var(--muted); }
+
+/* Home: fisarmonica e chiusura affiancate, testi allineati a sinistra sulla stessa linea */
+.duo { display: grid; gap: var(--section); padding: var(--section) var(--margin); }
+.duo .faq { padding: 0; max-width: none; margin: 0; }
+.duo .closing { padding: 0; text-align: left; }
+.duo .closing h2 { max-width: 14ch; margin: 0; }
+.duo .closing > p { margin: 18px 0 28px; }
+.duo .field-wrap { max-width: none; margin: 0; }
+@media (min-width: 960px) {
+  .duo { grid-template-columns: 1fr 1fr; gap: clamp(48px, 6vw, 96px); align-items: start; }
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+.footer { padding: 64px var(--margin) 32px; background: var(--surface); }
+.footer__grid { display: grid; gap: 40px; }
+.footer__brand p { margin-top: 16px; color: var(--muted); max-width: 30ch; }
+.footer h2 { font-size: var(--step-small); font-weight: 500; letter-spacing: 0; color: var(--muted); margin-bottom: 14px; line-height: 1.4; }
+.footer ul { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.footer a { text-decoration: none; }
+.footer__legal { margin-top: 64px; font-size: var(--step-small); color: var(--muted); }
+@media (min-width: 900px) { .footer__grid { grid-template-columns: 2fr 1fr 1fr 1fr; } }
+
+/* =========================================================
+   Movimento (i contenuti restano visibili senza JavaScript)
+   ========================================================= */
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-rise] { opacity: 0; transform: translateY(20px); animation: rise 800ms var(--ease-out) forwards; animation-delay: calc(var(--i, 0) * 90ms + 120ms); }
+  .js [data-reveal] { opacity: 0; transform: translateY(24px); transition: opacity 700ms var(--ease-out), transform 900ms var(--ease-out); transition-delay: calc(var(--i, 0) * 70ms); }
+  .js [data-reveal].is-in { opacity: 1; transform: none; }
+}
+@keyframes rise { to { opacity: 1; transform: none; } }
+@keyframes fan-in { from { opacity: 0; translate: 0 60px; } to { opacity: 1; translate: 0 0; } }
+
+/* Tipo di progetto accanto al nome: UX/UI pieno, product design solo bordo */
+.work__head { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 14px; }
+.work__type { flex: none; padding: 4px 12px; border-radius: 999px; font-size: var(--step-small); line-height: 1.3; letter-spacing: 0; white-space: nowrap; }
+.work__type--ux { background: var(--accent); color: var(--accent-ink); }
+.work__type--pd { border: 1.5px solid var(--muted); color: var(--ink); padding: 2.5px 10.5px; }
+@media (min-width: 960px) {
+  .work__head { flex-wrap: nowrap; }
+  .work__item .work__type { transition: transform 300ms var(--ease-out); }
+  .work__item.is-active .work__type { transform: translateX(10px); }
+}
+
+/* Card dei progetti: la parte bassa prende il colore principale del progetto, come nelle card Figma */
+[data-for="raceready"], [data-frame="raceready"]       { --card-bg: #172033; --card-ink: #f3f4f6; --card-muted: #c3c9d6; --card-badge: rgba(255, 255, 255, 0.14); }
+[data-for="wis"], [data-frame="wis"]                   { --card-bg: #ff4502; --card-ink: #141413; --card-muted: #2b1407; --card-badge: rgba(20, 20, 19, 0.14); }
+[data-for="libraccio"], [data-frame="libraccio"]       { --card-bg: #025c42; --card-ink: #f4faf6; --card-muted: #cfe8d8; --card-badge: rgba(255, 255, 255, 0.14); }
+/* Runso: gradiente dei quattro fluo del brand, voluto da Edoardo. Il blu è schiarito (#3d8bff) perché il testo nero resti leggibile su tutta la card (minimo 6:1) */ /* taste-skill-ignore */
+[data-for="runso"], [data-frame="runso"]               { --card-bg: linear-gradient(100deg, #e4f224 0%, #ff6a13 35%, #ff3fa4 68%, #3d8bff 100%); --card-ink: #0b0b0b; --card-muted: #1a1a1a; --card-badge: rgba(11, 11, 11, 0.14); } /* taste-skill-ignore */
+[data-for="rubinetteria"], [data-frame="rubinetteria"] { --card-bg: #3e5566; --card-ink: #ffffff; --card-muted: #dbe4ea; --card-badge: rgba(255, 255, 255, 0.14); }
+[data-for="eklettica"], [data-frame="eklettica"]       { --card-bg: #f67a00; --card-ink: #141413; --card-muted: #2b1500; --card-badge: rgba(20, 20, 19, 0.14); }
+[data-for="foulard"], [data-frame="foulard"]           { --card-bg: #4a4032; --card-ink: #f1ece0; --card-muted: #d9d1bf; --card-badge: rgba(216, 208, 122, 0.22); }
+.pcard[data-for] a, .work__card { background: var(--card-bg); color: var(--card-ink); }
+.pcard[data-for] .pcard__title { color: var(--card-ink); }
+.pcard[data-for] .pcard__text, .work__card .pcard__text { color: var(--card-muted); }
+.pcard[data-for] .badge, .work__card .badge { background: var(--card-badge); color: var(--card-ink); }
+@media (hover: hover) and (pointer: fine) { .pcard[data-for] a:hover { background: var(--card-bg); } }

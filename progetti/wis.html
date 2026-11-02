@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WIS Home Agent · Edoardo Giolitti</title>
+  <meta name="description" content="WIS Home Agent, un'assistente AI per un'app di domotica: case study UX/UI su fiducia, risparmio visibile e autonomia progressiva, dal telefono allo smartwatch.">
+  <meta property="og:title" content="WIS Home Agent · Edoardo Giolitti">
+  <meta property="og:description" content="Progettiamo la relazione, non il comando.">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://edoardogiolitti.github.io/assets/img/wis/cover-16x9.jpg">
+  <meta name="theme-color" content="#ff4502">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="../css/home.css">
+  <link rel="stylesheet" href="../css/case.css">
+  <script>document.documentElement.classList.add('js')</script>
+</head>
+<body class="theme-wis">
+  <a class="skip-link" href="#main">Vai al contenuto</a>
+
+  <header class="topbar">
+    <a class="brand" href="../index.html" aria-label="Edoardo Giolitti, home"><span class="brand__mark" aria-hidden="true"></span><span>Edoardo Giolitti</span></a>
+    <nav aria-label="Principale">
+      <ul class="topbar__links" role="list">
+        <li class="topbar__menu"><a class="link" href="../index.html#progetti">Progetti</a></li>
+        <li><a class="link" href="../chi-sono.html">Chi sono</a></li>
+      </ul>
+    </nav>
+    <a class="button button--outline" href="../index.html#contatti">Scrivimi</a>
+  </header>
+
+  <main id="main">
+    <!-- 1. HERO -->
+    <section class="cs-hero wis-hero" aria-labelledby="wis-title" data-wis-fx="hero">
+      <div class="wis-hero__grid">
+        <div>
+          <a class="back" href="../index.html#progetti">← Tutti i progetti</a>
+          <h1 id="wis-title" data-rise style="--i:0">WIS Home&nbsp;Agent</h1>
+          <p class="cs-hero__sub" data-rise style="--i:1">Progettiamo la relazione, non il&nbsp;comando.</p>
+          <ul class="badges" role="list" data-rise style="--i:2">
+            <li class="badge">Brief aziendale, Master Talent Garden</li>
+            <li class="badge">Team di 6</li>
+            <li class="badge">UX e UI</li>
+            <li class="badge">App</li>
+            <li class="badge">Smartwatch</li>
+            <li class="badge">Live Activity</li>
+          </ul>
+        </div>
+        <img data-wis-stop="hero" data-wis-face="happy" class="wis-hero__mascot" src="../assets/img/wis/mascotte.png" width="561" height="561" alt="WIS, la mascotte dell'assistente: un piccolo robot bianco con il volto nero e gli occhi arancioni che sorridono, sospeso sopra la sua base luminosa." data-rise style="--i:2">
+      </div>
+    </section>
+
+    <!-- 2. TIMELINE -->
+    <section class="chapter chapter--light" aria-labelledby="timeline">
+      <div class="chapter__head">
+        <h2 data-wis-stop="text" data-wis-face="smile" id="timeline" data-reveal>Una casa che collabora, non che&nbsp;esegue</h2>
+        <p data-reveal style="--i:1">Il brief chiedeva un'assistente AI per un'app di domotica. Siamo partiti da come cambia il rapporto tra persona e casa.</p>
+      </div>
+      <ol class="tl" role="list" aria-label="Dal passato al futuro">
+        <li data-reveal><span class="tl__dot" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="10" rx="5"/><circle cx="7" cy="12" r="3"/></svg></span><b>Manuale</b><span>Accendo e spengo io</span></li>
+        <li data-reveal style="--i:1"><span class="tl__dot" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></span><b>Comando</b><span>Lo chiedo all'app</span></li>
+        <li data-reveal style="--i:2"><span class="tl__dot" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v10H9l-5 4z"/><path d="M8 10h8"/></svg></span><b>Intenzione</b><span>Dico cosa voglio ottenere</span></li>
+        <li data-wis-stop="above" data-wis-face="happy" class="is-now" data-reveal style="--i:3"><span class="tl__dot" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11 12 4l9 7v9H3z"/><path d="m9 15 2 2 4-4"/></svg></span><b>Autonomia</b><span>La casa agisce, io mi fido</span></li>
+      </ol>
+      <p class="tl-axis" aria-hidden="true"><span>Passato</span><span>Futuro</span></p>
+      <p class="vision" data-reveal>Il futuro non è una casa che esegue meglio i comandi, ma una casa che <span class="kw">collabora</span>: comprende il contesto, <span class="kw">agisce in autonomia</span> e tiene chiaro il confine tra la decisione del sistema e il controllo umano.</p>
+    </section>
+
+    <!-- 3. PERSONA -->
+    <section class="chapter" aria-labelledby="persona" data-wis-fx="visor">
+      <div class="persona">
+        <blockquote data-wis-stop="text" data-wis-face="happy" data-reveal>«Non voglio controllare ogni dispositivo, <span class="kw">voglio fidarmi</span>.»</blockquote>
+        <div class="prose">
+          <h2 id="persona" class="sr-only">La persona</h2>
+          <p data-reveal style="--i:1"><strong>Andrea, 45 anni.</strong> Lavora a tempo pieno e gestisce due case: la sua e quella della madre.</p>
+          <p data-reveal style="--i:2">Non ha tempo né voglia di seguire i dispositivi uno per uno. Vuole sapere che la casa è a posto, e intervenire solo quando serve davvero.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. INSIGHT E OPPORTUNITA -->
+    <section class="chapter" style="padding-top:0" aria-labelledby="insight" data-wis-fx="visor">
+      <div class="chapter__head">
+        <h2 data-wis-stop="text" data-wis-face="focus" id="insight" data-reveal>Tre bisogni, una parola: <span class="kw">fiducia</span></h2>
+        <p data-reveal style="--i:1">Gli insight della ricerca, dalle interviste agli scenari simulati.</p>
+      </div>
+      <div class="insights-wis">
+        <article class="insight-wis" data-reveal>
+          <h3>Comfort</h3>
+          <p>La smart home funziona quando scompare.</p>
+          <p>Gli utenti non vogliono gestire un sistema: vogliono che la casa si adatti a loro, in silenzio.</p>
+        </article>
+        <article class="insight-wis" data-reveal style="--i:1">
+          <h3>Save energy</h3>
+          <p>Il risparmio non si vede, quindi non esiste.</p>
+          <p>I competitor offrono dashboard, grafici e report via mail che nessuno legge. Nessuno oggi osserva, impara e propone in automatico.</p>
+        </article>
+        <article class="insight-wis" data-reveal style="--i:2">
+          <h3>Safety</h3>
+          <p>La sicurezza è fiducia.</p>
+          <p>Gli utenti vogliono sapere che qualcuno controlla la casa per loro. Un sistema che vuole essere autonomo deve prima dimostrare di essere affidabile: l'autonomia progressiva non è una feature, è una conquista.</p>
+        </article>
+      </div>
+      <h2 class="sr-only">Le opportunità</h2>
+      <ul data-wis-stop="text" data-wis-face="smile" class="opps" role="list">
+        <li data-reveal><span class="kw">Silenzio intelligente</span> nella routine.</li>
+        <li data-reveal style="--i:1"><span class="kw">Presenza chiara</span> nel momento critico.</li>
+        <li data-reveal style="--i:2"><span class="kw">Valore visibile</span> quando c'è qualcosa da raccontare.</li>
+      </ul>
+    </section>
+
+    <!-- 5. WIS COME COMPAGNO -->
+    <section class="chapter chapter--light" aria-labelledby="compagno">
+      <div class="chapter__head">
+        <h2 data-wis-stop="text" data-wis-face="wink" id="compagno" data-reveal><span class="kw">WIS</span> come compagno</h2>
+        <p data-reveal style="--i:1">Si parla con WIS, non con i dispositivi. Il controllo manuale resta, per chi lo vuole.</p>
+      </div>
+      <ul class="wis-trio" role="list">
+        <li data-reveal>
+          <img src="../assets/img/wis/compagno-home.jpg" width="612" height="1310" loading="lazy" alt="La home dell'app: WIS chiede «Come posso aiutarti?» e sotto la casa in 3D con lo stato di porte, luci e sistema.">
+          <h3>La casa, vista com'è</h3>
+          <p>La home mostra la casa in 3D. Si tocca una stanza e si vedono subito i dispositivi attivi.</p>
+        </li>
+        <li data-reveal style="--i:1">
+          <img src="../assets/img/wis/compagno-stanza.jpg" width="608" height="1310" loading="lazy" alt="La stanza Soggiorno: tre dispositivi attivi e una card per ognuno, con l'interruttore per accenderlo o spegnerlo.">
+          <h3>Una card per dispositivo</h3>
+          <p>Un tocco per accendere o spegnere, senza cercare in un elenco.</p>
+        </li>
+        <li data-reveal style="--i:2">
+          <img data-wis-stop="image" data-wis-face="smile" src="../assets/img/wis/compagno-routine.jpg" width="612" height="1310" loading="lazy" alt="La chat con WIS e la routine mattutina attiva: tapparelle alzate, macchinetta del caffè accesa, temperatura regolata.">
+          <h3>Routine che si raccontano</h3>
+          <p>WIS dice cosa ha fatto: tapparelle, caffè, temperatura. Tutto in una conversazione.</p>
+        </li>
+      </ul>
+    </section>
+
+    <!-- 6. SMARTWATCH E LIVE ACTIVITY -->
+    <section class="chapter chapter--light" style="padding-top:0" aria-labelledby="presenza">
+      <article class="feature-lib">
+        <div class="prose">
+          <h3 id="presenza" data-reveal>Presente solo quando serve</h3>
+          <p data-reveal style="--i:1">Quando succede qualcosa di importante WIS arriva dove sei: sul polso, sulla Dynamic Island, nella Live Activity.</p>
+          <p data-reveal style="--i:2">Suona il corriere? WIS chiede se gestire lui la consegna, e si risponde con un tocco. La notifica passa da <span class="kw">interruzione</span> a <span class="kw">fonte di fiducia</span>.</p>
+          <img class="wis-watch" src="../assets/img/wis/watch-corriere.jpg" width="640" height="970" loading="lazy" data-reveal style="--i:3" alt="Smartwatch con WIS che chiede: «Ha suonato il corriere. Vuoi che gestisca io la consegna?», con i bottoni Sì e No.">
+        </div>
+        <figure data-reveal>
+          <img data-wis-stop="image" data-wis-face="surprised" src="../assets/img/wis/watch-polso.jpg" width="1600" height="2054" loading="lazy" alt="Uno smartwatch al polso mostra la mascotte WIS e un avviso urgente in diretta.">
+        </figure>
+      </article>
+      <article class="feature-lib feature-lib--flip">
+        <div class="prose">
+          <h3 data-reveal>Anche a schermo bloccato</h3>
+          <p data-reveal style="--i:1">La Live Activity tiene il conto del tempo e mostra cosa WIS ha già fatto: videocamera attivata, clip registrata, un avviso se non rispondi entro un minuto.</p>
+          <p data-reveal style="--i:2">Rispondi, ignora o apri l'app. La scelta resta a te.</p>
+        </div>
+        <figure data-reveal>
+          <img data-wis-stop="image" data-wis-face="focus" src="../assets/img/wis/live-activity-set.jpg" width="1600" height="1590" loading="lazy" alt="Un telefono bloccato con la Dynamic Island «Corriere in attesa di risposta», le varianti «Sto aprendo…» e la Live Activity estesa: corriere alla porta, in attesa da 14 secondi, con le azioni già fatte da WIS e i bottoni Rispondi e Ignora.">
+        </figure>
+      </article>
+    </section>
+
+    <!-- 7. NOTIFICHE -->
+    <section class="chapter chapter--light" style="padding-top:0" aria-labelledby="notifiche">
+      <article class="feature-lib">
+        <div class="prose">
+          <h3 id="notifiche" data-reveal>Prima quello che conta</h3>
+          <p data-reveal style="--i:1">WIS distingue quello che conta da quello che ha già risolto. Le notifiche si dividono tra quello che chiede <span class="kw">attenzione subito</span> e quello che WIS ha già gestito da solo.</p>
+          <p data-reveal style="--i:2">Passata l'emergenza WIS osserva, impara e suggerisce, per esempio di accendere la lavatrice alle 19 per risparmiare. Lo storico mostra tutto quello che ha fatto: trasparenza totale.</p>
+        </div>
+        <figure data-reveal>
+          <img data-wis-stop="image" data-wis-face="focus" src="../assets/img/wis/notifiche.jpg" width="1600" height="1552" loading="lazy" alt="Due schermate Notifiche. A sinistra un avviso da gestire subito: è suonato il campanello nella fascia della consegna e WIS propone di occuparsi di tutto, con i bottoni «Sì, gestisci tu» e «No, ci penso io». A destra un suggerimento: accendere la lavatrice alle 19:00 per risparmiare.">
+        </figure>
+      </article>
+    </section>
+
+    <!-- 8. VALORE -->
+    <section class="chapter chapter--light" style="padding-top:0" aria-labelledby="valore">
+      <article class="feature-lib feature-lib--flip">
+        <div class="prose">
+          <h3 id="valore" data-reveal>Il valore, reso <span class="kw">visibile</span></h3>
+          <p data-reveal style="--i:1">La casa restituisce valore, WIS lo rende visibile. Ogni mese un riepilogo concreto: quanto hai risparmiato e dove, su acqua, luce e gas. L'AI diventa un <span class="kw">narratore del valore</span>.</p>
+          <p data-reveal style="--i:2">Il risparmio non resta un numero nascosto in un report: è la prima cosa che si vede.</p>
+        </div>
+        <figure data-reveal>
+          <img data-wis-stop="image" data-wis-face="happy" src="../assets/img/wis/valore.jpg" width="1600" height="1571" loading="lazy" alt="Due schermate della sezione Valore: il riepilogo di giugno con 18 kg di CO₂ evitati e 29 € risparmiati grazie ai consigli di WIS, acqua −12%, luce −15%, gas −9%, e sotto le challenge per acqua, luce e gas.">
+        </figure>
+      </article>
+    </section>
+
+    <!-- 9. SFIDE -->
+    <section class="chapter chapter--light" style="padding-top:0" aria-labelledby="sfide">
+      <article class="feature-lib">
+        <div class="prose">
+          <h3 id="sfide" data-reveal>Sfide personalizzate</h3>
+          <p data-reveal style="--i:1">Le sfide spingono abitudini migliori su luce, clima, acqua e aria. Ognuna dice quanto vale, quanto manca e <span class="kw">quanto si risparmia</span>.</p>
+          <p data-reveal style="--i:2">«Docce più brevi»: due minuti in meno, 6 € al mese, 72 € all'anno. Finita una sfida, WIS ne propone un'altra in base alle tue abitudini.</p>
+        </div>
+        <figure data-reveal>
+          <img data-wis-stop="image" data-wis-face="wink" src="../assets/img/wis/sfide-set.jpg" width="1600" height="1572" loading="lazy" alt="Due schermate delle sfide. L'elenco con «Docce più brevi», facile, risparmio stimato 6 € al mese; il dettaglio della sfida attiva da 12 giorni con 2 traguardi su 3, il risparmio stimato di 2,40 € finora, 6 € al mese e 72 € all'anno, e il bottone «Un'altra sfida?».">
+        </figure>
+      </article>
+    </section>
+
+    <!-- 10. LIVELLI DI AUTOMAZIONE -->
+    <section class="chapter chapter--light" style="padding-top:0" aria-labelledby="controllo">
+      <article class="feature-lib feature-lib--flip">
+        <div class="prose">
+          <h3 id="controllo" data-reveal>Andrea decide quanto <span class="kw">fidarsi</span></h3>
+          <p data-reveal style="--i:1">E WIS si adatta. Tre livelli di automazione, scelti dall'utente. Il controllo non sparisce mai: si delega, consapevolmente.</p>
+          <ul class="methods" role="list">
+            <li class="method" data-reveal style="--i:2"><h3>Base</h3><p>WIS suggerisce cosa fare, ma aspetta la tua conferma.</p></li>
+            <li class="method" data-reveal style="--i:3"><h3>Bilanciato</h3><p>Gestisce le routine comuni e ti avvisa, con la possibilità di modificare.</p></li>
+            <li class="method" data-reveal style="--i:4"><h3>Avanzato</h3><p>Ottimizza comfort, consumi e sicurezza con più autonomia.</p></li>
+          </ul>
+          <p data-reveal style="--i:5">Dallo stesso profilo si gestiscono più case e più utenti. Proprio quello che serve ad Andrea.</p>
+        </div>
+        <figure data-reveal>
+          <img data-wis-stop="image" data-wis-face="smile" src="../assets/img/wis/profilo-set.jpg" width="1600" height="1576" loading="lazy" alt="Due schermate del profilo: la gestione delle case (Casa tua a Milano, Casa di Maria a Sanremo) e degli utenti, e la sezione «Personalizza Wis» con i livelli Base, Bilanciato e Avanzato, con Bilanciato selezionato.">
+        </figure>
+      </article>
+    </section>
+
+    <!-- 11. PROCESSO -->
+    <section class="chapter" aria-labelledby="processo" data-wis-fx="visor">
+      <div class="split">
+        <div class="chapter__head" style="margin-bottom:0">
+          <h2 data-wis-stop="text" data-wis-face="focus" id="processo" data-reveal>L'AI anche nel processo</h2>
+        </div>
+        <div class="prose">
+          <p data-reveal>Gemini, ChatGPT e Perplexity ci hanno aiutato con il benchmark, le personas, gli scenari simulati e la sintesi dei dati.</p>
+          <p data-reveal style="--i:1">Il design system l'abbiamo costruito in Figma e Figma Make, poi con Antigravity e Claude Code siamo arrivati a un <span class="kw">prototipo funzionante in codice</span>.</p>
+          <p data-reveal style="--i:2">Nel team i ruoli UX e UI si sono scambiati spesso: così ogni scelta l'abbiamo vista da due lati.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12. CHIUSURA -->
+    <section class="chapter cs-closing" style="padding-top:0" aria-labelledby="chiusura" data-wis-fx="visor">
+      <h2 data-wis-stop="text" data-wis-face="happy" id="chiusura" data-reveal>La relazione, <span class="kw">non il comando</span></h2>
+      <a class="next next--libraccio" href="libraccio.html" data-reveal data-lib-fx>
+        <div><span>Progetto successivo</span><strong>Libraccio.it</strong></div>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </section>
+  </main>
+
+  <!-- WIS in 3D: accompagna lo scorrimento (decorativo) -->
+  <div class="wis3d" data-wis3d aria-hidden="true"></div>
+
+  <footer class="footer" id="contatti">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <a class="brand" href="../index.html"><span class="brand__mark" aria-hidden="true"></span><span>Edoardo Giolitti</span></a>
+        <p>Progetto con metodo, ma senza spegnere l'istinto.</p>
+      </div>
+      <div>
+        <h2>Progetti</h2>
+        <ul role="list">
+          <li><a class="link" href="raceready.html">RaceReady</a></li>
+          <li><a class="link" href="wis.html" aria-current="page">WIS Home Agent</a></li>
+          <li><a class="link" href="libraccio.html">Libraccio.it</a></li>
+          <li><a class="link" href="runso.html">Runso</a></li>
+          <li><a class="link" href="rubinetteria.html">Rubinetteria</a></li>
+          <li><a class="link" href="eklettica.html">Eklettica</a></li>
+          <li><a class="link" href="torino-icons.html">Torino Icons</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Pagine</h2>
+        <ul role="list">
+          <li><a class="link" href="../index.html">Home</a></li>
+          <li><a class="link" href="../chi-sono.html">Chi sono</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Contatti</h2>
+        <ul role="list">
+          <li><a class="link" data-mail-link>Email</a></li>
+          <li><a class="link" href="https://www.linkedin.com/in/edoardo-giolitti" rel="noopener">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="footer__legal">© 2026 Edoardo Giolitti, UX/UI Designer</p>
+  </footer>
+
+  <script src="../js/home.js" defer></script>
+  <script src="../js/wis-fx.js" defer></script>
+  <script src="../js/wis-model.js" defer></script>
+  <script src="../js/wis3d.js" defer></script>
+  <script src="../js/lib-fx.js" defer></script>
+</body>
+</html>

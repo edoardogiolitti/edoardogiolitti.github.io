@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RaceReady · Edoardo Giolitti</title>
+  <meta name="description" content="RaceReady, app mobile per runner amatoriali: supporto alla scelta e organizzazione della gara. Case study UX/UI dalla ricerca (8 interviste, 222 risposte) al prototipo.">
+  <meta property="og:title" content="RaceReady · Edoardo Giolitti">
+  <meta property="og:description" content="Non ti allena per la gara. Ti aiuta ad arrivarci pronto.">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://edoardogiolitti.github.io/assets/img/raceready/dettagli-gara.jpg">
+  <meta name="theme-color" content="#172033">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600&family=Montserrat:ital,wght@0,500;0,700;1,800&display=swap">
+  <link rel="stylesheet" href="../css/home.css">
+  <link rel="stylesheet" href="../css/case.css">
+  <link rel="stylesheet" href="../css/rr-masks.css">
+  <script>document.documentElement.classList.add('js')</script>
+</head>
+<body class="theme-raceready">
+  <a class="skip-link" href="#main">Vai al contenuto</a>
+
+  <header class="topbar">
+    <a class="brand" href="../index.html" aria-label="Edoardo Giolitti, home"><span class="brand__mark" aria-hidden="true"></span><span>Edoardo Giolitti</span></a>
+    <nav aria-label="Principale">
+      <ul class="topbar__links" role="list">
+        <li class="topbar__menu"><a class="link" href="../index.html#progetti">Progetti</a></li>
+        <li><a class="link" href="../chi-sono.html">Chi sono</a></li>
+      </ul>
+    </nav>
+    <a class="button button--outline" href="../index.html#contatti">Scrivimi</a>
+  </header>
+
+  <main id="main">
+    <!-- 1. HERO -->
+    <section class="cs-hero" aria-labelledby="rr-title" data-rr-fx="hero">
+      <a class="back" href="../index.html#progetti">← Tutti i progetti</a>
+      <h1 id="rr-title" class="wordmark-rr" data-rise style="--i:0"><span class="race">RACE</span>READY</h1>
+      <p class="cs-hero__sub" data-rise style="--i:1">Supporto alla scelta e organizzazione della&nbsp;gara.</p>
+      <ul class="badges" role="list" data-rise style="--i:2">
+        <li class="badge">Personal project, Master Talent Garden</li>
+        <li class="badge">Ricerca, UX e UI</li>
+        <li class="badge">App mobile</li>
+        <li class="badge">2026</li>
+      </ul>
+      <div class="phones-fan" aria-label="Schermate dell'app RaceReady">
+        <img data-mask="phone" data-pos="-2" style="--i:4" src="../assets/img/raceready/preparazione.jpg" width="760" height="1539" alt="Schermata Piani: il calendario di preparazione di gennaio con i reminder.">
+        <img data-mask="phone" data-pos="-1" style="--i:2" src="../assets/img/raceready/elenco-gare-n.jpg" width="760" height="1539" alt="Schermata Scopri: le prossime gare con il match score.">
+        <img data-mask="phone" data-pos="0"  style="--i:0" src="../assets/img/raceready/dettagli-gara.jpg" width="760" height="1539" alt="Scheda della Torino City Half Marathon: match score all'87%, panoramica e bottone Iscriviti.">
+        <img data-mask="phone" data-pos="1"  style="--i:1" src="../assets/img/raceready/splash.jpg" width="760" height="1539" alt="Schermata di avvio con il logo RaceReady.">
+        <img data-mask="phone" data-pos="2"  style="--i:3" src="../assets/img/raceready/profilo-n.jpg" width="760" height="1539" alt="Schermata Profilo con il palmarès delle gare.">
+      </div>
+    </section>
+
+    <!-- 2. ESPLORAZIONE -->
+    <section class="chapter" aria-labelledby="esplorazione" data-rr-fx="map">
+      <div class="split">
+        <div class="prose">
+          <h2 id="esplorazione" style="font-size: var(--step-head)" data-reveal>Esplorazione</h2>
+          <p data-reveal style="--i:1">La ricerca ha combinato interviste qualitative e questionario per capire abitudini, difficoltà e bisogni dei runner amatoriali.</p>
+          <p data-reveal style="--i:2"><span class="kw kw--label">Insight ricorrenti</span> I runner cercano chiarezza nella scelta delle gare, nei requisiti di iscrizione, nella logistica e nella preparazione pratica. E spesso si affidano ad amici, run club o fonti online.</p>
+        </div>
+        <ul class="bignums" role="list">
+          <li data-reveal style="--i:0"><b>8</b><span>interviste</span></li>
+          <li data-reveal style="--i:1"><b>222</b><span>risposte al questionario</span></li>
+          <li data-reveal style="--i:2"><b>+50</b><span>insight</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 3. POSIZIONAMENTO -->
+    <section class="chapter chapter--light" aria-labelledby="posizionamento">
+      <div class="chapter__head">
+        <h2 id="posizionamento" data-reveal>Non un coach, un compagno di&nbsp;gara</h2>
+        <p data-reveal style="--i:1">Di app per allenarsi ce ne sono tante. Mancava quella che aiuta a <span class="kw">scegliere</span> e a <span class="kw">organizzarsi</span>.</p>
+      </div>
+      <div class="versus">
+        <div data-reveal><small>Le app di training partono da</small><p>«Voglio migliorare la mia performance.»</p></div>
+        <div data-reveal style="--i:1" data-rr-fx="map"><small>RaceReady parte da</small><p>«Voglio fare una gara, ma non so quale scegliere, cosa serve e come organizzarmi.»</p></div>
+      </div>
+      <ul class="questions" role="list" aria-label="Le domande a cui risponde RaceReady">
+        <li data-reveal><span class="cp" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.5"/></svg></span>Quale gara ha senso per me?</li>
+        <li data-reveal style="--i:1"><span class="cp" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 17a8 8 0 0 1 16 0"/><path d="M12 17l4.5-5"/></svg></span>Sono pronto o è troppo presto?</li>
+        <li data-reveal style="--i:2"><span class="cp" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3h9l3 3v15H6z"/><path d="M12 10v6M9 13h6"/></svg></span>Serve il certificato medico?</li>
+        <li data-reveal style="--i:3"><span class="cp" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M7 14.5h4"/></svg></span>Mi serve la RunCard?</li>
+        <li data-reveal style="--i:4"><span class="cp" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="9" cy="8.5" r="3"/><path d="M3.5 19a5.5 5.5 0 0 1 11 0"/><circle cx="16.5" cy="9.5" r="2.5"/><path d="M15.5 14.2a4.6 4.6 0 0 1 5 4.8"/></svg></span>Chi viene con me?</li>
+        <li data-reveal style="--i:5"><span class="cp" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 21V4"/><path d="M5 4h13l-2.5 4.5L18 13H5"/></svg></span>Cosa devo portare il giorno della gara?</li>
+      </ul>
+    </section>
+
+    <!-- 4. PROFILAZIONE -->
+    <section class="chapter" aria-labelledby="profilazione" data-rr-fx="map">
+      <div class="split split--wide-media">
+        <div class="prose">
+          <h2 id="profilazione" style="font-size: var(--step-head)" data-reveal>Dalla profilazione alla gara giusta</h2>
+          <p data-reveal style="--i:1">Un onboarding breve e mirato per capire chi è il runner e cosa cerca in una gara.</p>
+          <p data-reveal style="--i:2"><span class="kw kw--label">Raccoglie</span> Livello e frequenza di corsa, distanza massima, esperienze passate, obiettivi e preferenze.</p>
+          <p data-reveal style="--i:3"><span class="kw kw--label">Serve a</span> Proporre le gare consigliate, ridurre la confusione iniziale e generare un match score coerente con il profilo.</p>
+        </div>
+        <div class="screens screens--stagger" data-reveal>
+          <img data-mask="onboarding" src="../assets/img/raceready/onboarding-1.jpg" width="700" height="1514" alt="Onboarding, domanda 1: che tipo di runner sei? Selezionato: corro 2-3 volte a settimana." loading="lazy">
+          <img data-mask="onboarding" src="../assets/img/raceready/onboarding-2.jpg" width="700" height="1514" alt="Onboarding, domanda 2: qual è la distanza più lunga che hai corso di recente? Selezionato: oltre 21 km." loading="lazy">
+          <img data-mask="onboarding" src="../assets/img/raceready/onboarding-3.jpg" width="700" height="1514" alt="Onboarding, domanda 3: quali aspetti valuti nella scelta di una gara? Selezionato: compagnia, amici, run club." loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. RICERCA E MATCH SCORE -->
+    <section class="chapter chapter--light" aria-labelledby="ricerca">
+      <div class="split">
+        <div>
+          <div class="chapter__head" style="margin-bottom:0">
+            <h2 id="ricerca" data-reveal>La ricerca della gara perfetta</h2>
+            <p data-reveal style="--i:1">Non solo una lista di eventi, ma uno strumento per scegliere con più sicurezza.</p>
+          </div>
+          <div class="prose" style="margin-top:36px">
+            <p data-reveal><span class="kw kw--label">Match score</span> Una valutazione rispetto al profilo dell'utente, classificata in modo semplice su tre livelli.</p>
+          </div>
+          <ul class="levels" role="list" aria-label="I tre livelli del match score">
+            <li data-reveal><span class="match match--ok"><b>87%<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.6"/><path d="M8 7.2v4"/><circle cx="8" cy="4.9" r="0.4"/></svg></b><small>Adatto a te</small></span><p>La gara è adatta al tuo profilo: hai già corso distanze vicine.</p></li>
+            <li data-reveal style="--i:1"><span class="match match--mid"><b>54%<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.6"/><path d="M8 7.2v4"/><circle cx="8" cy="4.9" r="0.4"/></svg></b><small>Sfidante ma possibile</small></span><p>La gara è sfidante, ma organizzabile con la giusta preparazione.</p></li>
+            <li data-reveal style="--i:2"><span class="match match--low"><b>21%<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.6"/><path d="M8 7.2v4"/><circle cx="8" cy="4.9" r="0.4"/></svg></b><small>Meglio più avanti</small></span><p>La distanza è ancora lontana: meglio puntare prima a una gara più corta.</p></li>
+          </ul>
+        </div>
+        <div class="screens screens--phones" data-reveal>
+          <img src="../assets/img/raceready/elenco-gare.jpg" width="760" height="1539" alt="Schermata Scopri: «Ciao Mario, let's race!», ricerca, filtri rapidi e le prossime gare con match score 87%, 54% e 21%." loading="lazy" style="width:min(48%, 320px)">
+          <img src="../assets/img/raceready/filtri.jpg" width="760" height="1254" alt="Pannello filtri: atmosfera, tifo, qualità del pacco gara e tipologia." loading="lazy" style="width:min(48%, 320px); margin-top:14%; border-radius:24px">
+        </div>
+      </div>
+      <p class="muted" style="margin-top:40px; font-size:var(--step-small); max-width:60ch" data-reveal><span class="kw kw--label">Filtri</span> Distanza, luogo, periodo, prezzo, tipologia, requisiti, atmosfera, tifo, qualità del pacco gara.</p>
+    </section>
+
+    <!-- 6. CONFRONTO -->
+    <section class="chapter chapter--light" style="padding-top:0" aria-labelledby="confronto">
+      <div class="split">
+        <div class="screens screens--phones" data-reveal>
+          <img src="../assets/img/raceready/salvate.jpg" width="760" height="1539" alt="Schermata Salvate con le gare preferite." loading="lazy" style="width:min(48%, 300px)">
+          <img src="../assets/img/raceready/confronta-gare.jpg" width="760" height="1539" alt="Schermata Confronta gare: due gare selezionate, bottone Confronta (2)." loading="lazy" style="width:min(48%, 300px)">
+        </div>
+        <div>
+          <div class="chapter__head">
+            <h2 id="confronto" data-reveal>Confronta e scegli con più sicurezza</h2>
+            <p data-reveal style="--i:1">Più gare interessanti, messe a confronto subito. Senza aprire siti diversi o ricordare informazioni sparse.</p>
+          </div>
+          <div class="table-wrap" data-reveal>
+            <table class="compare">
+              <caption class="sr-only">Tabella di confronto tra due gare</caption>
+              <thead><tr><th scope="col">Gara</th><th scope="col">Match</th><th scope="col">Distanza</th><th scope="col">Tipologia</th></tr></thead>
+              <tbody>
+                <tr><td>Torino City Half Marathon</td><td><span class="match match--ok match--sm"><b>87%</b></span></td><td>21 km</td><td>Strada</td></tr>
+                <tr><td>Barcelona Half Marathon</td><td><span class="match match--mid match--sm"><b>54%</b></span></td><td>21 km</td><td>Strada</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. SCHEDA GARA -->
+    <section class="chapter" aria-labelledby="formato" data-rr-fx="map">
+      <div class="tabbed">
+        <div>
+          <div class="chapter__head">
+            <h2 id="formato" data-reveal>Tutte le gare, stesso formato</h2>
+            <p data-reveal style="--i:1">Ogni gara diventa una scheda standard, con le informazioni sempre nello stesso ordine.</p>
+          </div>
+          <div class="tabs" role="tablist" aria-label="Sezioni della scheda gara" style="justify-content:flex-start">
+            <button class="tab" role="tab" id="t-pan" aria-controls="p-pan" aria-selected="true">Panoramica</button>
+            <button class="tab" role="tab" id="t-com" aria-controls="p-com" aria-selected="false" tabindex="-1">Community</button>
+            <button class="tab" role="tab" id="t-per" aria-controls="p-per" aria-selected="false" tabindex="-1">Percorso</button>
+          </div>
+          <p class="muted">Panoramica, community, percorso, logistica, requisiti.</p>
+        </div>
+        <div class="tabbed__media">
+          <div class="slide" role="tabpanel" id="p-pan" aria-labelledby="t-pan">
+            <img data-mask="phone" src="../assets/img/raceready/dettagli-gara.jpg" width="760" height="1539" alt="Scheda gara, sezione Panoramica: distanza 21 km, data 29 novembre 2026, tipologia strada, descrizione e perché potrebbe piacerti." loading="lazy" style="max-height:76svh; border-radius:0">
+          </div>
+          <div class="slide" role="tabpanel" id="p-com" aria-labelledby="t-com" hidden>
+            <img data-mask="community" src="../assets/img/raceready/community.jpg" width="1200" height="394" alt="Card Community: corri insieme alla community, 18 amici e 3 run club parteciperanno." loading="lazy" style="max-height:none">
+          </div>
+          <div class="slide" role="tabpanel" id="p-per" aria-labelledby="t-per" hidden>
+            <img data-mask="percorso" src="../assets/img/raceready/percorso.jpg" width="900" height="1322" alt="Sezione Percorso: mappa del tracciato a Torino, i luoghi dove passerai e l'avviso «percorso esposto, valuta meteo e idratazione»." loading="lazy">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. IL RUNNER -->
+    <section class="chapter chapter--light" aria-labelledby="runner">
+      <div class="split split--wide-media">
+        <div class="prose">
+          <h2 id="runner" style="font-size: var(--step-head)" data-reveal>Il runner</h2>
+          <p data-reveal style="--i:1">Il profilo raccoglie tutto ciò che serve per gestire la propria esperienza da runner.</p>
+          <p data-reveal style="--i:2"><span class="kw kw--label">Palmarès</span> Le gare completate, i risultati, i badge e i traguardi raggiunti nel tempo.</p>
+          <p data-reveal style="--i:3"><span class="kw kw--label">Documenti</span> Il caricamento e la gestione dei documenti per l'iscrizione, come certificato medico e RunCard. Il certificato si scansiona direttamente con la fotocamera.</p>
+        </div>
+        <div class="screens screens--phones" data-reveal>
+          <img src="../assets/img/raceready/profilo.jpg" width="760" height="1539" alt="Schermata Profilo: Mario Rossi, palmarès con i badge delle gare e preferenze." loading="lazy">
+          <img src="../assets/img/raceready/documenti.jpg" width="760" height="1539" alt="Schermata Documenti: RunCard caricata e certificato medico da caricare." loading="lazy" style="margin-top:-6%">
+          <img src="../assets/img/raceready/scansione-documento.jpg" width="760" height="1539" alt="Scansione del certificato medico con la fotocamera." loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. PIANI -->
+    <section class="chapter" aria-labelledby="piani" data-rr-fx="map">
+      <div class="split">
+        <div class="screens screens--phones" data-reveal>
+          <img data-mask="phone" src="../assets/img/raceready/preparazione.jpg" width="760" height="1539" alt="Piani, Preparazione: calendario con i reminder di oggi e della settimana." loading="lazy" style="width:min(48%, 300px)">
+          <img data-mask="phone" src="../assets/img/raceready/checklist.jpg" width="760" height="1539" alt="Piani, Checklist: pre-iscrizione completata, pre-gara in corso." loading="lazy" style="width:min(48%, 300px); margin-top:12%">
+        </div>
+        <div class="prose">
+          <h2 id="piani" style="font-size: var(--step-head)" data-reveal>Dall'iscrizione al race day</h2>
+          <p data-reveal style="--i:1"><span class="kw kw--label">Preparazione</span> Un calendario con reminder sulla nutrizione e consigli di routine di prevenzione.</p>
+          <p data-reveal style="--i:2"><span class="kw kw--label">Checklist</span> Personalizzate per pre-iscrizione, pre-gara e race day. Il giorno della gara non devi cercare nulla.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. MODELLO -->
+    <section class="chapter chapter--light" aria-labelledby="modello">
+      <div class="chapter__head chapter__head--center">
+        <h2 id="modello" data-reveal>Scegli il piano giusto per la tua gara</h2>
+        <p data-reveal style="--i:1">Dopo la prova gratuita sulla prima gara, si sbloccano gli strumenti avanzati per organizzarsi meglio.</p>
+      </div>
+      <div class="plans">
+        <article class="plan" data-reveal>
+          <h3>Prova gratuita</h3>
+          <p class="plan__price">0 € <small>la prima gara</small></p>
+          <p class="plan__note">Per capire se RaceReady fa per te, su una gara vera.</p>
+        </article>
+        <article class="plan" data-reveal style="--i:1">
+          <h3>Mensile</h3>
+          <p class="plan__price">2,99 € <small>/mese</small></p>
+          <p class="plan__note">Perfetto per preparare una gara.</p>
+          <ul role="list">
+            <li>Scopri gare e dettagli gara</li><li>Race Match Score</li><li>Salva e confronta le gare</li><li>Document wallet</li>
+            <li class="pro">Checklist personalizzate</li><li class="pro">Consigli di prevenzione</li><li class="pro">Consigli nutrizionali</li><li class="pro">Reminder personalizzati</li>
+          </ul>
+        </article>
+        <article class="plan plan--hl" data-reveal style="--i:2" data-rr-fx="map">
+          <h3>Annuale</h3>
+          <p class="plan__price">19,99 € <small>/anno</small></p>
+          <p class="plan__note">1,67 € al mese: risparmi rispetto al mensile.</p>
+          <ul role="list">
+            <li>Scopri gare e dettagli gara</li><li>Race Match Score</li><li>Salva e confronta le gare</li><li>Document wallet</li>
+            <li class="pro">Checklist personalizzate</li><li class="pro">Consigli di prevenzione</li><li class="pro">Consigli nutrizionali</li><li class="pro">Reminder personalizzati</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- 11. CHIUSURA -->
+    <section class="chapter cs-closing" aria-labelledby="chiusura" data-rr-fx="map">
+      <h2 id="chiusura" data-reveal>Dalla voglia di correre al&nbsp;via</h2>
+      <p class="tagline" data-reveal style="--i:1">Non ti allena per la gara. <span class="accent">Ti aiuta ad arrivarci pronto.</span></p>
+      <div class="bib-wrap" data-reveal style="--i:2">
+        <div class="bib">
+          <p class="bib__band" aria-hidden="true"><span class="wordmark-rr"><span class="race">RACE</span>READY</span></p>
+          <div class="bib__body">
+            <img src="../assets/img/raceready/qr-prototipo.jpg" width="480" height="480" alt="QR code del prototipo di RaceReady." loading="lazy">
+            <p><strong>Prova il prototipo</strong>Inquadra il QR con il telefono.</p>
+          </div>
+          <div class="bib__tab" aria-hidden="true"></div>
+        </div>
+      </div>
+      <a class="next next--wis" href="wis.html" data-reveal>
+        <div><span>Progetto successivo</span><strong>WIS Home Agent</strong></div>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </section>
+  </main>
+
+  <footer class="footer" id="contatti">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <a class="brand" href="../index.html"><span class="brand__mark" aria-hidden="true"></span><span>Edoardo Giolitti</span></a>
+        <p>Progetto con metodo, ma senza spegnere l'istinto.</p>
+      </div>
+      <div>
+        <h2>Progetti</h2>
+        <ul role="list">
+          <li><a class="link" href="raceready.html" aria-current="page">RaceReady</a></li>
+          <li><a class="link" href="wis.html">WIS Home Agent</a></li>
+          <li><a class="link" href="libraccio.html">Libraccio.it</a></li>
+          <li><a class="link" href="runso.html">Runso</a></li>
+          <li><a class="link" href="rubinetteria.html">Rubinetteria</a></li>
+          <li><a class="link" href="eklettica.html">Eklettica</a></li>
+          <li><a class="link" href="torino-icons.html">Torino Icons</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Pagine</h2>
+        <ul role="list">
+          <li><a class="link" href="../index.html">Home</a></li>
+          <li><a class="link" href="../chi-sono.html">Chi sono</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Contatti</h2>
+        <ul role="list">
+          <li><a class="link" data-mail-link>Email</a></li>
+          <li><a class="link" href="https://www.linkedin.com/in/edoardo-giolitti" rel="noopener">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="footer__legal">© 2026 Edoardo Giolitti, UX/UI Designer</p>
+  </footer>
+
+  <script src="../js/home.js" defer></script>
+  <script src="../js/rr-fx.js" defer></script>
+</body>
+</html>

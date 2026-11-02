@@ -1,0 +1,64 @@
+/* =========================================================
+   Pagina Chi sono: si carica DOPO home.css e ne riusa i token
+   (fondo antracite, arancione primary, Hanken Grotesk).
+   ========================================================= */
+
+.kw { color: var(--accent); font-weight: 500; } /* parola chiave nel colore d'accento */
+
+/* ---------- Hero: testo a sinistra, ritratto a destra ---------- */
+.about-hero { display: grid; gap: 40px; align-items: center; padding: 120px var(--margin) 0; }
+.about-hero h1 { font-size: var(--step-head); max-width: 14ch; }
+.about-hero__text p { margin: 22px 0 30px; color: var(--ink); max-width: 52ch; }
+.about-hero__actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.about-hero__photo { width: 100%; max-width: 460px; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--radius); background: var(--surface); }
+@media (min-width: 900px) {
+  .about-hero { grid-template-columns: 7fr 5fr; gap: 72px; min-height: min(100svh, 900px); padding-top: 96px; }
+  .about-hero__photo { justify-self: end; }
+}
+
+/* ---------- Sezioni ---------- */
+.about-section { padding: var(--section) var(--margin) 0; }
+.about-split { display: grid; gap: 28px; }
+.about-split h2 { font-size: var(--step-head); max-width: 16ch; }
+.about-split .prose { display: grid; gap: 20px; }
+.about-split .prose p { color: var(--muted); max-width: 60ch; }
+.about-split .prose strong { color: var(--ink); font-weight: 500; }
+@media (min-width: 900px) { .about-split { grid-template-columns: 5fr 7fr; gap: 72px; } }
+
+/* Strumenti: tessere chiare con il logo e il nome */
+.tools { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 48px; }
+.tool { display: grid; justify-items: center; gap: 10px; padding: 20px 12px; border-radius: var(--radius); background: var(--surface); }
+.tool img { width: 56px; height: 56px; border-radius: 14px; background: #fff; object-fit: contain; }
+.tool span { font-size: var(--step-small); color: var(--ink); text-align: center; }
+@media (min-width: 720px) { .tools { grid-template-columns: repeat(6, 1fr); } }
+.tool img[src$=".svg"] { padding: 9px; }   /* i loghi in SVG non hanno il margine interno dei PNG */
+
+/* L'AI nel processo: stessa riga titolo + testo, i quattro strumenti sotto il testo */
+.about-ai { margin-top: clamp(64px, 8vw, 112px); }
+.about-ai h3 { font-size: var(--step-lead); letter-spacing: -0.03em; line-height: 1.1; max-width: 18ch; }
+.about-ai .tools { grid-template-columns: repeat(2, 1fr); margin-top: 8px; }
+@media (min-width: 720px) { .about-ai .tools { grid-template-columns: repeat(4, 1fr); } }
+
+/* Processo: due foto affiancate */
+.process-photos { display: grid; gap: 12px; margin-top: 40px; }
+.process-photos img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: var(--radius); background: var(--surface); }
+@media (min-width: 720px) { .process-photos { grid-template-columns: 1fr 1fr; } }
+
+/* Soft skill come pillole */
+.skills-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+
+/* ---------- Percorso: righe con logo ---------- */
+.path { display: grid; gap: 8px; margin-top: 48px; }
+.path__item { display: grid; gap: 16px; align-items: center; padding: 24px; border-radius: var(--radius); background: var(--surface); }
+.path__when { font-size: var(--step-small); color: var(--accent); }
+.path__what { font-size: var(--step-lead); letter-spacing: -0.03em; line-height: 1.15; }
+.path__where { color: var(--muted); margin-top: 6px; }
+.path__logo { width: 150px; height: 64px; object-fit: contain; border-radius: 8px; background: #fff; padding: 6px 10px; }
+@media (min-width: 900px) {
+  .path__item { grid-template-columns: 160px 1fr auto; gap: 32px; padding: 28px 32px; }
+}
+
+/* ---------- Oltre il design: foto ---------- */
+.life-photos { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 48px; }
+.life-photos img { width: 100%; aspect-ratio: 5 / 4; object-fit: cover; border-radius: var(--radius); background: var(--surface); }
+@media (min-width: 900px) { .life-photos { grid-template-columns: repeat(4, 1fr); } }

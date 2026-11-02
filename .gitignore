@@ -1,0 +1,12 @@
+# File di lavoro privati: note, decisioni, percorsi del computer
+CLAUDE.md
+.claude/
+.taste-skill/
+docs/
+_sorgenti/
+
+# Segreti e file di sistema
+.env*
+Thumbs.db
+desktop.ini
+.DS_Store
